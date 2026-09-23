@@ -17,12 +17,13 @@ export function EnquiryForm({ type = "contact" }: { type?: "contact" | "involvem
   const options = type === "contact" ? contactOptions : involvementOptions;
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); setStatus("idle");
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const payload = { formType: type, fullName: String(form.get("fullName")||""), email: String(form.get("email")||""), phone: String(form.get("phone")||""), organisation: String(form.get("organisation")||""), enquiryType: String(form.get("enquiryType")||""), message: String(form.get("message")||"") };
     const parsed = enquirySchema.safeParse(payload);
     if (!parsed.success) { const next: Record<string,string> = {}; parsed.error.issues.forEach(issue => { const key=String(issue.path[0]); if (!next[key]) next[key]=issue.message; }); setErrors(next); return; }
     setErrors({}); setStatus("sending");
-    try { await save({ data: parsed.data }); setStatus("success"); event.currentTarget.reset(); } catch { setStatus("error"); }
+    try { await save({ data: parsed.data }); formElement.reset(); setStatus("success"); } catch { setStatus("error"); }
   }
   const field = (name:string) => errors[name] ? <p id={`${name}-error`} className="form-error">{errors[name]}</p> : null;
   return <form onSubmit={onSubmit} noValidate className="grid gap-5" aria-label={type === "contact" ? "Contact form" : "Get involved form"}>
