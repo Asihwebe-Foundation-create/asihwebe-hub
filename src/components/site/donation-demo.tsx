@@ -1,0 +1,10 @@
+import { useState } from "react";
+import { HeartHandshake, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+export function DonationDemo() {
+  const [amount,setAmount]=useState("300"); const [message,setMessage]=useState("");
+  function proceed(){ const numeric=Number(amount); setMessage(numeric>0 ? `Donation of R${numeric.toLocaleString("en-ZA")} selected. This demonstration does not collect or process payment.` : "Please choose or enter an amount greater than zero."); }
+  return <div className="border border-border bg-background p-6 md:p-8"><div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-sm bg-brand-gold-soft text-brand-orange"><HeartHandshake/></span><div><p className="font-display text-xl font-bold text-brand-navy">Choose an amount</p><p className="text-sm text-muted-foreground">South African rand</p></div></div><div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">{[150,300,500,1000].map(value=><Button key={value} type="button" variant={amount===String(value)?"gold":"outline"} onClick={()=>{setAmount(String(value));setMessage("")}}>R{value.toLocaleString("en-ZA")}</Button>)}</div><label className="mt-5 block text-sm font-semibold text-brand-navy" htmlFor="customAmount">Custom amount</label><div className="mt-2 flex items-center rounded-md border border-input"><span className="px-3 font-semibold text-muted-foreground">R</span><Input id="customAmount" type="number" min="1" value={amount} onChange={e=>{setAmount(e.target.value);setMessage("")}} className="border-0 shadow-none"/></div><div className="mt-5 flex gap-2 rounded-sm bg-muted p-3 text-sm text-muted-foreground"><ShieldCheck className="mt-0.5 size-4 shrink-0 text-brand-orange"/><p><strong className="text-brand-navy">Demonstration only.</strong> No funds are collected or processed in this prototype.</p></div><Button type="button" variant="gold" size="lg" className="mt-5 w-full" onClick={proceed}>Continue demonstration</Button>{message&&<p role="status" className="mt-4 text-sm leading-6 text-muted-foreground">{message}</p>}</div>;
+}

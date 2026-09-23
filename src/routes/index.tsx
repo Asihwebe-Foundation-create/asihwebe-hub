@@ -1,24 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Building2, Handshake, HeartHandshake, Laptop, Scale, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CTA, ImpactMetrics, Pathway, ProgrammeGrid, SectionHeading, ValuesStrip } from "@/components/site/sections";
+import { EnquiryForm } from "@/components/site/enquiry-form";
+import hero from "@/assets/asihwebe-hero.jpg";
+import entrepreneur from "@/assets/entrepreneur-digital.jpg";
+import workshop from "@/assets/skills-workshop.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route=createFileRoute("/")({head:()=>({meta:[{title:"Asihwebe Foundation | Empowering South African Communities"},{name:"description",content:"Asihwebe Foundation enables enterprise development, digital participation, skills and economic opportunity in South African communities."},{property:"og:title",content:"Asihwebe Foundation | Empowering Communities"},{property:"og:description",content:"Practical pathways to enterprise growth, digital participation and inclusive economic opportunity."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:"/"}]}),component:Home});
+function Home(){return <>
+<section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-brand-navy"><img src={hero} alt="South African entrepreneurs collaborating in a community business workshop" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover object-center" fetchPriority="high"/><div className="absolute inset-0 bg-[linear-gradient(90deg,var(--brand-navy)_0%,color-mix(in_oklab,var(--brand-navy)_90%,transparent)_42%,color-mix(in_oklab,var(--brand-navy)_20%,transparent)_100%)]"/><div className="site-container relative flex min-h-[calc(100svh-5rem)] items-center py-16"><div className="max-w-3xl"><p className="eyebrow text-brand-gold">Asihwebe Foundation · South Africa</p><h1 className="mt-5 text-balance font-display text-4xl font-bold leading-[1.08] text-primary-foreground sm:text-5xl lg:text-7xl">Empowering Communities. Enabling Opportunity. Shaping Futures.</h1><p className="mt-7 max-w-2xl text-base leading-7 text-primary-foreground/80 md:text-lg">Asihwebe Foundation strengthens communities and unlocks economic opportunity through enterprise development, digital enablement, skills development and strategic partnerships.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Button asChild variant="gold" size="lg"><Link to="/programmes">Explore Our Programmes<ArrowRight/></Link></Button><Button asChild variant="heroOutline" size="lg"><Link to="/partnerships">Partner With Us</Link></Button></div></div></div></section>
+<section className="section-pad"><div className="site-container grid gap-12 lg:grid-cols-[1fr_.9fr] lg:items-center"><div><SectionHeading eyebrow="Who we are" title="Pathways to participation, opportunity and inclusion" copy="Asihwebe Foundation is a South African non-profit organisation committed to sustainable economic inclusion for communities often underserved by traditional systems."/><p className="mt-5 leading-7 text-muted-foreground">Through programmes, partnerships and practical interventions, we help entrepreneurs and communities build capability, adopt digital tools, access markets and connect with institutions that can support their growth.</p><Button asChild variant="navy" className="mt-7"><Link to="/about">Learn More About Us<ArrowRight/></Link></Button></div><div className="relative"><img src={entrepreneur} alt="South African small business owner using a mobile digital tool" width={1408} height={1008} loading="lazy" className="aspect-[4/3] w-full object-cover"/><div className="absolute -bottom-5 -left-5 hidden bg-brand-gold p-5 md:block"><p className="max-w-[14rem] font-display text-sm font-bold text-brand-navy">Practical community and enterprise development, built with partners.</p></div></div></div></section>
+<section className="section-pad bg-muted"><div className="site-container"><SectionHeading eyebrow="Our programmes" title="Four areas of practical impact" copy="Focused interventions designed to build capability, enable participation and connect people to opportunity."/><ProgrammeGrid/></div></section>
+<section className="section-pad bg-brand-navy"><div className="site-container"><div className="grid gap-10 lg:grid-cols-[1fr_.8fr] lg:items-end"><SectionHeading light eyebrow="Flagship programme" title="Township & Rural Digital Enterprise Accelerator" copy="TRDEA helps township and rural entrepreneurs become digitally enabled, market-ready and better connected to economic opportunity."/><div className="flex gap-3 lg:justify-end"><Button asChild variant="gold"><Link to="/trdea">Explore TRDEA<ArrowRight/></Link></Button><Button asChild variant="heroOutline"><Link to="/partnerships">Partner With TRDEA</Link></Button></div></div><Pathway/></div></section>
+<section className="section-pad"><div className="site-container"><SectionHeading eyebrow="Our approach" title="From connection to sustainable growth" copy="We combine trusted relationships, practical tools and coordinated action to move from opportunity to participation."/><ValuesStrip/></div></section>
+<section className="section-pad bg-muted"><div className="site-container grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center"><img src={workshop} alt="Young South Africans participating in a digital skills workshop" width={1408} height={1008} loading="lazy" className="aspect-[4/3] w-full object-cover"/><div><SectionHeading eyebrow="Impact through partnership" title="Community impact takes an ecosystem" copy="We work with organisations that share our commitment to inclusive economic participation and sustainable community development."/><div className="mt-7 grid gap-3 sm:grid-cols-2">{[{Icon:Building2,label:"Public sector"},{Icon:Handshake,label:"Institutional partners"},{Icon:Laptop,label:"Technology partners"},{Icon:Users,label:"Community organisations"}].map(({Icon,label})=><div key={String(label)} className="flex items-center gap-3 border-b pb-3 text-sm font-semibold text-brand-navy"><Icon className="size-5 text-brand-orange"/>{String(label)}</div>)}</div><Button asChild variant="navy" className="mt-7"><Link to="/partnerships">Explore Partnerships<ArrowRight/></Link></Button></div></div></section>
+<section className="section-pad bg-brand-navy"><div className="site-container"><SectionHeading light eyebrow="Impact" title="Accountable from the start" copy="This framework is ready for verified programme results as delivery expands. We will publish real figures—not estimates—once validated."/><ImpactMetrics/></div></section>
+<section className="section-pad"><div className="site-container"><SectionHeading eyebrow="Why Asihwebe" title="Community understanding, translated into action"/><div className="mt-10 grid gap-5 md:grid-cols-5">{[{Icon:Users,label:"Community-Centred"},{Icon:Scale,label:"Practical"},{Icon:Laptop,label:"Digital-Enabled"},{Icon:Handshake,label:"Partnership-Driven"},{Icon:HeartHandshake,label:"Scalable"}].map(({Icon,label})=><div key={String(label)} className="border-t border-brand-navy/20 pt-5"><Icon className="text-brand-orange"/><h3 className="mt-4 font-display text-base font-bold text-brand-navy">{String(label)}</h3></div>)}</div></div></section>
+<section className="section-pad bg-muted"><div className="site-container grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><SectionHeading eyebrow="Get involved" title="Bring your time, expertise or partnership" copy="Individuals and organisations can support entrepreneur development, programmes and practical community activation."/><div className="bg-background p-6 md:p-8"><EnquiryForm type="involvement"/></div></div></section>
+<CTA title="Let’s build opportunity together" copy="Partner with Asihwebe to strengthen enterprise, digital participation and inclusive local economies."/></>}
