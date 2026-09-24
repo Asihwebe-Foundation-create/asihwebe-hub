@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { enquirySchema, submitEnquiry } from "@/lib/enquiries.functions";
 
-const contactOptions = ["General Enquiry", "Partnership", "Programme Participation", "Sponsorship", "Volunteer", "Media", "Other"];
+const contactOptions = ["General Enquiry", "Programme Enquiry", "Partnership", "Sponsorship", "Volunteer", "Skills / Expertise", "Media", "Other"];
 const involvementOptions = ["Volunteer", "Provide Professional Expertise", "Sponsor a Programme", "Partner With Us", "Support Entrepreneur Development", "General Enquiry"];
 
 export function EnquiryForm({ type = "contact" }: { type?: "contact" | "involvement" }) {
